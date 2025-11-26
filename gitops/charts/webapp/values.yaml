@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: REPLACE_WITH_ECR_REPO_URL
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 5000
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
