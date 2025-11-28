@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: 078646182495.dkr.ecr.us-west-2.amazonaws.com/gitops-webapp
   pullPolicy: IfNotPresent
-  tag: "3ecfe3b"
+  tag: "381d5c8"
 
 service:
   type: LoadBalancer
