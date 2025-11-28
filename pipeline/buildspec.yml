@@ -22,11 +22,14 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Updating Helm chart values...
-      - cd ..
-      - 'sed -i "s|tag: .*|tag: \"$IMAGE_TAG\"|" gitops/charts/webapp/values.yaml'
-      - echo Committing changes to Git...
+      - export REPO_URL=https://git-codecommit.$AWS_DEFAULT_REGION.amazonaws.com/v1/repos/gitops-on-aws
+      - git config --global credential.helper '!aws codecommit credential-helper $@'
+      - git config --global credential.UseHttpPath true
+      - git clone $REPO_URL temp_repo
+      - cd temp_repo
+      - sed -i "s|tag: .*|tag: \"$IMAGE_TAG\"|" gitops/charts/webapp/values.yaml
       - git config --global user.email "codebuild@example.com"
       - git config --global user.name "CodeBuild"
       - git add gitops/charts/webapp/values.yaml
       - git commit -m "Update image tag to $IMAGE_TAG"
-      - git push origin HEAD:main
+      - git push origin main
