@@ -27,7 +27,7 @@ phases:
       - git config --global credential.UseHttpPath true
       - git clone $REPO_URL temp_repo
       - cd temp_repo
-      - sed -i "s|tag: .*|tag: \"$IMAGE_TAG\"|" gitops/charts/webapp/values.yaml
+      - 'sed -i "s|tag: .*|tag: \"$IMAGE_TAG\"|" gitops/charts/webapp/values.yaml'
       - git config --global user.email "codebuild@example.com"
       - git config --global user.name "CodeBuild"
       - git add gitops/charts/webapp/values.yaml
